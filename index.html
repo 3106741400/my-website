@@ -12,35 +12,20 @@
             font-family: Arial, "Microsoft Yahei", sans-serif;
         }
 
-                /* 头部样式 */
-        .header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://picsum.photos/1200/400') center/cover;
-            color: white;
-            padding: 100px 10% 60px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
         body {
             background: #f8f9fa;
             line-height: 1.6;
         }
 
-        /* 自动轮播头部 */
-        .header-carousel {
-            height: 400px;
+        /* 轮播容器 */
+        .carousel-container {
             position: relative;
+            height: 400px;
             overflow: hidden;
             margin-top: 60px;
         }
 
-        .carousel-inner {
+        .carousel-slides {
             position: absolute;
             width: 300%;
             height: 100%;
@@ -55,30 +40,24 @@
             background-position: center;
         }
 
+        .header-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 100%;
+            padding: 0 10%;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
         @keyframes slide {
             0%, 25% { left: 0; }
             33.3%, 58.3% { left: -100%; }
             66.6%, 91.6% { left: -200%; }
             100% { left: 0; }
-        }
-
-        /* 固定导航栏 */
-        .nav {
-            background: #2c3e50;
-            padding: 15px 10%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
         }
 
         /* 主要内容容器 */
@@ -144,45 +123,27 @@
             background: #f8f9fa;
         }
 
-        /* 新增品种优势 */
-        .advantage-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin: 40px 0;
-        }
-
-        .advantage-card {
-            padding: 25px;
-            background: #f8fff9;
-            border-radius: 8px;
-            border-left: 4px solid #4CAF50;
-        }
-
         /* 图片展示区 */
-        .gallery-grid {
+        .image-gallery {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .gallery-item {
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
         }
 
         .gallery-item img {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-bottom: 3px solid #4CAF50;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            border-bottom: 3px solid #3498db;
         }
 
         /* 企业信息模块 */
@@ -207,74 +168,97 @@
             margin-bottom: 10px;
         }
 
-        /* 响应式设计 */
+        /* 移动端适配 */
         @media (max-width: 768px) {
-            .comparison, .advantage-grid, .gallery-grid, .info-grid {
+            .carousel-container {
+                height: 250px;
+                margin-top: 50px;
+            }
+
+            .header-text h1 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            .header-text p {
+                font-size: 0.9rem;
+            }
+
+            .image-gallery {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
-            
-            .header-carousel {
-                height: 300px;
+
+            .comparison {
+                flex-direction: column;
+                gap: 15px;
             }
-            
-            .nav {
-                padding: 15px 5%;
+
+            .duck-type {
+                padding: 15px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .spec-table {
+                font-size: 0.9rem;
+            }
+
+            .spec-table td {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-container {
+                height: 200px;
+            }
+
+            .header-text h1 {
+                font-size: 1.3rem;
+            }
+
+            .gallery-item:hover {
+                transform: none;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="logo">德盛羽绒</div>
-        <div class="nav-links">
-            <a href="#advantages">产品优势</a>
-            <a href="#gallery">产品展示</a>
-            <a href="#contact">联系我们</a>
+    <!-- 轮播头部 -->
+    <div class="carousel-container">
+        <div class="carousel-slides">
+            <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/lunbo1.jpg')"></div>
+            <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/lunbo3.jpg')"></div>        </div>
+        <div class="header-text">
+            <h1>大番鸭绒 - 高端羽绒制品优选原料</h1>
+            <p>晋州市德盛羽绒制品厂专业供应</p>
         </div>
-    </nav>
-
-    <div class="header">
-        <h1>大番鸭绒 - 高端羽绒制品优选原料</h1>
-        <p>晋州市德盛羽绒制品厂专业供应</p>
     </div>
 
     <div class="container">
-        <!-- 产品优势模块 -->
-        <div class="feature-section" id="advantages">
-            <h2 class="section-title">核心优势</h2>
-            
-            <div class="advantage-grid">
-                <div class="advantage-card">
-                    <h3>珍稀品种</h3>
-                    <p>源鸭品种来自南美珍稀鸭种，中国南方福建农户散养</p>
-                </div>
-                <div class="advantage-card">
-                    <h3>卓越品质</h3>
-                    <p>生长期长，未成形绒少，气味小于其他品种</p>
-                </div>
-                <div class="advantage-card">
-                    <h3>顶级保暖</h3>
-                    <p>绒朵与鹅绒相媲美，触感更加柔软，保暖效果提升30%</p>
-                </div>
-            </div>
-
+        <div class="feature-section">
+            <h2 class="section-title">产品核心优势</h2>
             <div class="comparison">
                 <div class="duck-type our-duck">
                     <h3>大番鸭绒特点</h3>
                     <ul>
-                        <li>平均体重达16斤</li>
-                        <li>绒朵直径8-10cm</li>
-                        <li>蓬松度800+</li>
-                        <li>天然抗菌性能</li>
+                        <li>绒朵直径达8-10cm，蓬松度800+</li>
+                        <li>油脂含量低，异味控制优异</li>
+                        <li>纤维强度高，使用寿命延长40%</li>
+                        <li>天然抗菌性能，符合OEKO-TEX标准</li>
                     </ul>
                 </div>
                 <div class="duck-type other-duck">
                     <h3>普通鸭绒对比</h3>
                     <ul>
-                        <li>平均体重8-10斤</li>
-                        <li>绒朵直径5-7cm</li>
-                        <li>蓬松度500-650</li>
-                        <li>需化学处理</li>
+                        <li>绒朵直径5-7cm，蓬松度500-650</li>
+                        <li>需化学除味处理</li>
+                        <li>纤维易断裂，使用寿命短</li>
+                        <li>需添加抗菌剂</li>
                     </ul>
                 </div>
             </div>
@@ -286,34 +270,26 @@
                 <tr><td>清洁度</td><td>1000+mm</td></tr>
                 <tr><td>耗氧量</td><td>≤5.0mg/100g</td></tr>
             </table>
-        </div>
 
-        <!-- 产品展示模块 -->
-        <div class="feature-section" id="gallery">
-            <h2 class="section-title">产品实拍</h2>
-            <div class="gallery-grid">
+            <h3 class="section-title" style="margin-top:40px;">产品实拍</h3>
+            <div class="image-gallery">
                 <div class="gallery-item">
-                    <img src="images/dapanya.jpg" alt="加工流程">
-                    <div class="img-caption">大番鸭实图</div>
+                    <img src="images/jidishipai.jpg" alt="大番鸭养殖" loading="lazy">
+                    <p>南美珍稀鸭种福建散养基地</p>
                 </div>
                 <div class="gallery-item">
-                    <img src="images/jidishipai.jpg" alt="大番鸭养殖基地">
-                    <div class="img-caption">福建散养基地实拍</div>
+                    <img src="images/duibi.jpg" alt="绒朵对比" loading="lazy">
+                    <p>绒朵对比（左：普通鸭绒 右：大番鸭绒）</p>
                 </div>
                 <div class="gallery-item">
-                    <img src="images/duibi.jpg" alt="绒朵对比">
-                    <div class="img-caption">绒朵对比（左：普通鸭绒 右：大番鸭绒）</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/logo.png" alt="鸿翔认证">
-                    <div class="img-caption">鸿翔鸭业质量认证</div>
+                    <img src="images/logo.png" alt="鸿翔认证" loading="lazy">
+                    <p>鸿翔鸭业质量认证</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 企业信息模块 -->
-    <div class="company-info" id="contact">
+    <div class="company-info">
         <div class="info-grid">
             <div class="info-item">
                 <strong>晋州市德盛羽绒制品厂</strong>
@@ -326,10 +302,6 @@
                 <div>开户行：中国农业银行辛集市府街分理处</div>
                 <div>账号：50303301040003614</div>
                 <div>增值税发票资质完备</div>
-            </div>
-            <div class="info-item">
-                <strong>QQ邮箱</strong>
-                <div>3106741400@qq.com</div>
             </div>
         </div>
     </div>
