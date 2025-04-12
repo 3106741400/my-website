@@ -12,12 +12,7 @@
             font-family: Arial, "Microsoft Yahei", sans-serif;
         }
 
-        body {
-            background: #f8f9fa;
-            line-height: 1.6;
-        }
-
-        /* 头部样式 */
+                /* 头部样式 */
         .header {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('https://picsum.photos/1200/400') center/cover;
@@ -30,6 +25,60 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        body {
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        /* 自动轮播头部 */
+        .header-carousel {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .carousel-inner {
+            position: absolute;
+            width: 300%;
+            height: 100%;
+            animation: slide 15s infinite;
+        }
+
+        .carousel-item {
+            float: left;
+            width: 33.3333%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        @keyframes slide {
+            0%, 25% { left: 0; }
+            33.3%, 58.3% { left: -100%; }
+            66.6%, 91.6% { left: -200%; }
+            100% { left: 0; }
+        }
+
+        /* 固定导航栏 */
+        .nav {
+            background: #2c3e50;
+            padding: 15px 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         /* 主要内容容器 */
@@ -95,6 +144,47 @@
             background: #f8f9fa;
         }
 
+        /* 新增品种优势 */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .advantage-card {
+            padding: 25px;
+            background: #f8fff9;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        /* 图片展示区 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 3px solid #4CAF50;
+        }
+
         /* 企业信息模块 */
         .company-info {
             background: #2c3e50;
@@ -119,46 +209,72 @@
 
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .comparison {
-                flex-direction: column;
-            }
-            
-            .info-grid {
+            .comparison, .advantage-grid, .gallery-grid, .info-grid {
                 grid-template-columns: 1fr;
             }
             
-            .header h1 {
-                font-size: 1.8em;
+            .header-carousel {
+                height: 300px;
+            }
+            
+            .nav {
+                padding: 15px 5%;
             }
         }
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <div class="logo">德盛羽绒</div>
+        <div class="nav-links">
+            <a href="#advantages">产品优势</a>
+            <a href="#gallery">产品展示</a>
+            <a href="#contact">联系我们</a>
+        </div>
+    </nav>
+
     <div class="header">
         <h1>大番鸭绒 - 高端羽绒制品优选原料</h1>
         <p>晋州市德盛羽绒制品厂专业供应</p>
     </div>
 
     <div class="container">
-        <div class="feature-section">
-            <h2 class="section-title">产品核心优势</h2>
+        <!-- 产品优势模块 -->
+        <div class="feature-section" id="advantages">
+            <h2 class="section-title">核心优势</h2>
+            
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h3>珍稀品种</h3>
+                    <p>源鸭品种来自南美珍稀鸭种，中国南方福建农户散养</p>
+                </div>
+                <div class="advantage-card">
+                    <h3>卓越品质</h3>
+                    <p>生长期长，未成形绒少，气味小于其他品种</p>
+                </div>
+                <div class="advantage-card">
+                    <h3>顶级保暖</h3>
+                    <p>绒朵与鹅绒相媲美，触感更加柔软，保暖效果提升30%</p>
+                </div>
+            </div>
+
             <div class="comparison">
                 <div class="duck-type our-duck">
                     <h3>大番鸭绒特点</h3>
                     <ul>
-                        <li>绒朵直径达8-10cm，蓬松度800+</li>
-                        <li>油脂含量低，异味控制优异</li>
-                        <li>纤维强度高，使用寿命延长40%</li>
-                        <li>天然抗菌性能，符合OEKO-TEX标准</li>
+                        <li>平均体重达16斤</li>
+                        <li>绒朵直径8-10cm</li>
+                        <li>蓬松度800+</li>
+                        <li>天然抗菌性能</li>
                     </ul>
                 </div>
                 <div class="duck-type other-duck">
                     <h3>普通鸭绒对比</h3>
                     <ul>
-                        <li>绒朵直径5-7cm，蓬松度500-650</li>
-                        <li>需化学除味处理</li>
-                        <li>纤维易断裂，使用寿命短</li>
-                        <li>需添加抗菌剂</li>
+                        <li>平均体重8-10斤</li>
+                        <li>绒朵直径5-7cm</li>
+                        <li>蓬松度500-650</li>
+                        <li>需化学处理</li>
                     </ul>
                 </div>
             </div>
@@ -171,21 +287,49 @@
                 <tr><td>耗氧量</td><td>≤5.0mg/100g</td></tr>
             </table>
         </div>
+
+        <!-- 产品展示模块 -->
+        <div class="feature-section" id="gallery">
+            <h2 class="section-title">产品实拍</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/dapanya.jpg" alt="加工流程">
+                    <div class="img-caption">大番鸭实图</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/jidishipai.jpg" alt="大番鸭养殖基地">
+                    <div class="img-caption">福建散养基地实拍</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/duibi.jpg" alt="绒朵对比">
+                    <div class="img-caption">绒朵对比（左：普通鸭绒 右：大番鸭绒）</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/logo.png" alt="鸿翔认证">
+                    <div class="img-caption">鸿翔鸭业质量认证</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="company-info">
+    <!-- 企业信息模块 -->
+    <div class="company-info" id="contact">
         <div class="info-grid">
             <div class="info-item">
                 <strong>晋州市德盛羽绒制品厂</strong>
                 <div>信用代码：92130183MA08PR5D2E</div>
                 <div>地址：晋州市冻河头开发区</div>
-                <div>电话：13315464064</div>
+                <div>电话：13731178458 / 19333467999</div>
             </div>
             <div class="info-item">
                 <strong>银行账户</strong>
                 <div>开户行：中国农业银行辛集市府街分理处</div>
                 <div>账号：50303301040003614</div>
                 <div>增值税发票资质完备</div>
+            </div>
+            <div class="info-item">
+                <strong>QQ邮箱</strong>
+                <div>3106741400@qq.com</div>
             </div>
         </div>
     </div>
